@@ -1,9 +1,9 @@
 package com.example.storeapp;
 
 public class OrderService {
-    private PaymentService paymentService;
+    private final PaymentService paymentService;
 
-    public void setPaymentService(PaymentService paymentService) {
+    public OrderService(PaymentService paymentService) {
         this.paymentService = paymentService;
     }
 
