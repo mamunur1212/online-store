@@ -8,7 +8,8 @@ public class StoreAppApplication {
 
     public static void main(String[] args) {
         // SpringApplication.run(StoreAppApplication.class, args);
-        OrderService orderService = new OrderService(new StripePaymentService());
+        OrderService orderService = new OrderService();
+        orderService.setPaymentService(new PayPalPaymentService());
         orderService.placeOrder();
     }
 
