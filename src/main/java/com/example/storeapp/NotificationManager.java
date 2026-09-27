@@ -10,6 +10,7 @@ public class NotificationManager {
 
     @Autowired
     public NotificationManager(@Qualifier("sms") NotificationService notificationService) {
+        System.out.println("NotificationManager initialized with " + notificationService.getClass().getSimpleName());
         this.notificationService = notificationService;
     }
 
