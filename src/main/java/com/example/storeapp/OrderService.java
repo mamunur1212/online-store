@@ -10,18 +10,18 @@ public class OrderService {
     private final PaymentService paymentService;
 
     public OrderService(PaymentService paymentService) {
-        System.out.println("------------- OrderService initialized with " + paymentService.getClass().getSimpleName());
+        // System.out.println("------------- OrderService initialized with " + paymentService.getClass().getSimpleName());
         this.paymentService = paymentService;
     }
 
     @PostConstruct
     public void initialize() {
-        System.out.println("------------- OrderService PostConstruct " + paymentService.getClass().getSimpleName());
+        // System.out.println("------------- OrderService PostConstruct " + paymentService.getClass().getSimpleName());
     }
 
     @PreDestroy
     public void cleanup() {
-        System.out.println("------------- OrderService PreDestroy " + paymentService.getClass().getSimpleName());
+        // System.out.println("------------- OrderService PreDestroy " + paymentService.getClass().getSimpleName());
     }
 
     public void placeOrder() {
