@@ -3,6 +3,8 @@ package com.example.storeapp.entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -25,6 +27,9 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @ManyToMany(mappedBy = "wishlists")
+    private Set<User> users = new HashSet<>();
+
     public Product() {
 
     }
@@ -33,6 +38,14 @@ public class Product {
         this.name = name;
         this.price = price;
         this.description = description;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     public Long getId() {

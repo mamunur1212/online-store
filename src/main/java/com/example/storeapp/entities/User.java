@@ -39,6 +39,14 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Profile profile;
 
+    @ManyToMany
+    @JoinTable(
+            name = "wishlists",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<Product> wishlists = new HashSet<>();
+
     public User() {}
 
     public User(Long id, String name, String email, String password) {
@@ -103,6 +111,11 @@ public class User {
         profile.setUser(this);
     }
 
+    public void addProduct(Product product) {
+        wishlists.add(product);
+        product.getUsers().add(this);
+    }
+
     public void removeAddress(Address address) {
         addresses.remove(address);
         address.setUser(null);
@@ -111,6 +124,11 @@ public class User {
     public void removeTag(Tag tag) {
         tags.remove(tag);
         tag.getUsers().remove(this);
+    }
+
+    public void removeProduct(Product product) {
+        wishlists.remove(product);
+        product.getUsers().remove(this);
     }
 
     public void removeProfile(Profile profile) {
@@ -130,6 +148,7 @@ public class User {
                 ", addresses=" + addresses +
                 ", tags=" + tags +
                 ", profile=" + profile +
+                ", wishlists=" + wishlists +
                 '}';
     }
 }

@@ -14,8 +14,8 @@ public class StoreAppApplication {
 
     public static void main(String[] args) {
         // ApplicationContext context =  SpringApplication.run(StoreAppApplication.class, args);
-//        User user = new User(1L, "John Doe", "hello@example.com", "password");
-//        System.out.println(user);
+        User user = new User(1L, "John Doe", "hello@example.com", "password");
+        System.out.println(user);
 //
 //        Address address = new Address(1L, "123 Main St", "Anytown", "CA", "12345");
 //        System.out.println(address);
@@ -35,14 +35,17 @@ public class StoreAppApplication {
 //        user.addProfile(profile);
 //        System.out.println("User after adding profile: " + user);
 
-        Category category = new Category((byte) 1, "Electronics");
-        System.out.println(category);
-
+//        Category category = new Category((byte) 1, "Electronics");
+//        System.out.println(category);
+//
         Product product = new Product(1L, "Smartphone", new BigDecimal("699.99"), "A high-end smartphone with a great camera.");
         System.out.println(product);
+//
+//        category.addProduct(product);
+//        System.out.println("Category after adding product: " + category);
 
-        category.addProduct(product);
-        System.out.println("Category after adding product: " + category);
+        user.addProduct(product);
+        System.out.println("User after adding product: " + user);
     }
 
 }
