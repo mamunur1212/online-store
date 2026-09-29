@@ -1,5 +1,6 @@
 package com.example.storeapp;
 
+import com.example.storeapp.entities.Address;
 import com.example.storeapp.entities.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,13 +12,14 @@ public class StoreAppApplication {
 
     public static void main(String[] args) {
         // ApplicationContext context =  SpringApplication.run(StoreAppApplication.class, args);
-        User user = User.builder()
-                .id(1L)
-                .name("John Doe")
-                .email("hello@example.com")
-                .password("password")
-                .build();
+        User user = new User(1L, "John Doe", "hello@example.com", "password");
         System.out.println(user);
+
+        Address address = new Address(1L, "123 Main St", "Anytown", "CA", "12345");
+        System.out.println(address);
+
+        user.addAddress(address);
+        System.out.println("User after adding address: " + user);
     }
 
 }

@@ -3,11 +3,8 @@ package com.example.storeapp.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+import java.util.ArrayList;
+import java.util.List;
 @Entity
 @Table(name = "users")
 public class User {
@@ -25,6 +22,68 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    private List<Address> addresses = new ArrayList<>();
+
+    public User() {}
+
+    public User(Long id, String name, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public void addAddress(Address address) {
+        addresses.add(address);
+        address.setUser(this);
+    }
+
+    public void removeAddress(Address address) {
+        addresses.remove(address);
+        address.setUser(null);
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -32,6 +91,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", addresses=" + addresses +
                 '}';
     }
 }
