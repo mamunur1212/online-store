@@ -38,7 +38,7 @@ public class StoreAppApplication {
         Category category = new Category((byte) 1, "Electronics");
         System.out.println(category);
 
-        Product product = new Product(1L, "Smartphone", new BigDecimal("699.99"));
+        Product product = new Product(1L, "Smartphone", new BigDecimal("699.99"), "A high-end smartphone with a great camera.");
         System.out.println(product);
 
         category.addProduct(product);

@@ -18,6 +18,9 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
+    @Column(name = "description")
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
@@ -25,10 +28,11 @@ public class Product {
     public Product() {
 
     }
-    public Product(Long id, String name, BigDecimal price) {
+    public Product(Long id, String name, BigDecimal price, String description) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.description = description;
     }
 
     public Long getId() {
@@ -63,12 +67,21 @@ public class Product {
         this.category = category;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
