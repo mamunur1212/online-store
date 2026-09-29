@@ -1,6 +1,7 @@
 package com.example.storeapp;
 
 import com.example.storeapp.entities.Address;
+import com.example.storeapp.entities.Tag;
 import com.example.storeapp.entities.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +21,12 @@ public class StoreAppApplication {
 
         user.addAddress(address);
         System.out.println("User after adding address: " + user);
+
+        Tag tag = new Tag(1L, "VIP");
+        System.out.println(tag);
+
+        user.addTag(tag);
+        System.out.println("User after adding tag: " + user);
     }
 
 }
