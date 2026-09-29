@@ -36,6 +36,9 @@ public class User {
     )
     private Set<Tag> tags = new HashSet<>();
 
+    @OneToOne(mappedBy = "user")
+    private Profile profile;
+
     public User() {}
 
     public User(Long id, String name, String email, String password) {
@@ -95,6 +98,11 @@ public class User {
         tag.getUsers().add(this);
     }
 
+    public void addProfile(Profile profile) {
+        this.profile = profile;
+        profile.setUser(this);
+    }
+
     public void removeAddress(Address address) {
         addresses.remove(address);
         address.setUser(null);
@@ -104,6 +112,14 @@ public class User {
         tags.remove(tag);
         tag.getUsers().remove(this);
     }
+
+    public void removeProfile(Profile profile) {
+        if (this.profile != null && this.profile.equals(profile)) {
+            this.profile = null;
+            profile.setUser(null);
+        }
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -113,6 +129,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", addresses=" + addresses +
                 ", tags=" + tags +
+                ", profile=" + profile +
                 '}';
     }
 }

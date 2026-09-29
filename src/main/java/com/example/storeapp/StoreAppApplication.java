@@ -1,6 +1,7 @@
 package com.example.storeapp;
 
 import com.example.storeapp.entities.Address;
+import com.example.storeapp.entities.Profile;
 import com.example.storeapp.entities.Tag;
 import com.example.storeapp.entities.User;
 import org.springframework.boot.SpringApplication;
@@ -27,6 +28,12 @@ public class StoreAppApplication {
 
         user.addTag(tag);
         System.out.println("User after adding tag: " + user);
+
+        Profile profile = new Profile(1L, "This is a bio", "123-456-7890", null, 100);
+        System.out.println(profile);
+
+        user.addProfile(profile);
+        System.out.println("User after adding profile: " + user);
     }
 
 }
