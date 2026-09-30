@@ -1,6 +1,7 @@
 package com.example.storeapp;
 
 import com.example.storeapp.entities.*;
+import com.example.storeapp.repositories.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -13,10 +14,21 @@ import java.time.LocalDate;
 public class StoreAppApplication {
 
     public static void main(String[] args) {
-        // ApplicationContext context =  SpringApplication.run(StoreAppApplication.class, args);
-        User user = new User(1L, "John Doe", "hello@example.com", "password");
-        System.out.println(user);
-//
+        ApplicationContext context =  SpringApplication.run(StoreAppApplication.class, args);
+        User user = new User("John Doe", "hello1@example.com", "password");
+        // System.out.println(user);
+
+        UserRepository userRepository = context.getBean(UserRepository.class);
+        // userRepository.save(user);
+
+//        User user1 = userRepository.findById(1L).orElse(null);
+//        System.out.println(user1.getEmail());
+
+//        Iterable<User> users = userRepository.findAll();
+//        users.forEach(user1 -> System.out.println(user1.getEmail()));
+
+       // userRepository.deleteById(1L);
+
 //        Address address = new Address(1L, "123 Main St", "Anytown", "CA", "12345");
 //        System.out.println(address);
 //
@@ -38,14 +50,14 @@ public class StoreAppApplication {
 //        Category category = new Category((byte) 1, "Electronics");
 //        System.out.println(category);
 //
-        Product product = new Product(1L, "Smartphone", new BigDecimal("699.99"), "A high-end smartphone with a great camera.");
-        System.out.println(product);
+//        Product product = new Product(1L, "Smartphone", new BigDecimal("699.99"), "A high-end smartphone with a great camera.");
+//        System.out.println(product);
 //
 //        category.addProduct(product);
 //        System.out.println("Category after adding product: " + category);
-
-        user.addProduct(product);
-        System.out.println("User after adding product: " + user);
+//
+//        user.addProduct(product);
+//        System.out.println("User after adding product: " + user);
     }
 
 }
