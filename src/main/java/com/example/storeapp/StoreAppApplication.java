@@ -2,10 +2,12 @@ package com.example.storeapp;
 
 import com.example.storeapp.entities.*;
 import com.example.storeapp.repositories.UserRepository;
+import com.example.storeapp.services.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,10 +17,15 @@ public class StoreAppApplication {
 
     public static void main(String[] args) {
         ApplicationContext context =  SpringApplication.run(StoreAppApplication.class, args);
-        User user = new User("John Doe", "hello1@example.com", "password");
+
+        var service =  context.getBean(UserService.class);
+        service.fetchAddress();
+
+
+        // User user = new User("John Doe", "hello1@example.com", "password");
         // System.out.println(user);
 
-        UserRepository userRepository = context.getBean(UserRepository.class);
+        // UserRepository userRepository = context.getBean(UserRepository.class);
         // userRepository.save(user);
 
 //        User user1 = userRepository.findById(1L).orElse(null);

@@ -38,7 +38,7 @@ public class Profile {
 
     }
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     @MapsId
     private User user;

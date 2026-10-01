@@ -23,7 +23,7 @@ public class Address {
     @Column(name = "zip")
     private String zipCode;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
