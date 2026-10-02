@@ -49,9 +49,18 @@ public class UserService {
         var address = addressRepository.findById(1L).orElseThrow();
     }
     public void persistRelated() {
-        User user = new User("John Doe", "john.doe@example.com", "password");
+        User user = new User("John Doe", "john81.doe@example.com", "password");
         Address address = new Address("123 Main St", "Anytown", "CA", "12345");
         user.addAddress(address);
+        userRepository.save(user);
+    }
+
+    @Transactional
+    public void deleteRelated() {
+        User user = userRepository.findById(8L).orElseThrow();
+        // userRepository.delete(user);
+        var address = user.getAddresses().getFirst();
+        user.removeAddress(address);
         userRepository.save(user);
     }
 }
