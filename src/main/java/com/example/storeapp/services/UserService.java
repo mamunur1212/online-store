@@ -1,5 +1,6 @@
 package com.example.storeapp.services;
 
+import com.example.storeapp.entities.Address;
 import com.example.storeapp.entities.User;
 import com.example.storeapp.repositories.AddressRepository;
 import com.example.storeapp.repositories.ProfileRepository;
@@ -46,5 +47,11 @@ public class UserService {
 
     public void fetchAddress() {
         var address = addressRepository.findById(1L).orElseThrow();
+    }
+    public void persistRelated() {
+        User user = new User("John Doe", "john.doe@example.com", "password");
+        Address address = new Address("123 Main St", "Anytown", "CA", "12345");
+        user.addAddress(address);
+        userRepository.save(user);
     }
 }
