@@ -105,4 +105,9 @@ public class UserService {
         Product product = productRepository.findById(1L).orElseThrow();
         productRepository.delete(product);
     }
+
+    @Transactional
+    public void updateProductPrice() {
+        productRepository.updatePriceByCategoryId(new BigDecimal("799.99"), (byte) 1);
+    }
 }

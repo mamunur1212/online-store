@@ -1,7 +1,10 @@
 package com.example.storeapp.repositories;
 
 import com.example.storeapp.entities.Product;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -37,4 +40,49 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     // Limiting
     List<Product> findTop5ByOrderByPriceDesc();
+
+    //
+
+    List<Product> findByPriceBetweenOrderByName(BigDecimal price1, BigDecimal price2);
+
+    // Custom query methods, JPQL
+    @Query("SELECT p" +
+            " FROM Product p" +
+            " WHERE p.price between :price1 and :price2" +
+            " ORDER BY p.name"
+    )
+    List<Product> findProducts1(@Param("price1") BigDecimal price1, @Param("price2") BigDecimal price2);
+
+    // Custom query methods, native SQL
+    @Query(value = "SELECT *" +
+            " FROM products p" +
+            " WHERE p.price between :price1 and :price2" +
+            " ORDER BY p.name", nativeQuery = true
+    )
+    List<Product> findProducts2(@Param("price1") BigDecimal price1, @Param("price2") BigDecimal price2);
+
+
+//    @Query(value = "SELECT count(*)" +
+//            " FROM products p" +
+//            " WHERE p.price between :price1 and :price2", nativeQuery = true
+//    )
+    // Custom query methods, JPQL
+    @Query(
+            "SELECT count(p)" +
+                    " FROM Product p" +
+                    " WHERE p.price between :price1 and :price2"
+    )
+    long countProducts(
+            @Param("price1") BigDecimal price1, @Param("price2") BigDecimal price2
+    );
+
+    @Modifying
+    @Query(
+            "UPDATE Product p" +
+                    " SET p.price = :newPrice" +
+                    " WHERE p.category.id = :categoryId"
+    )
+    void updatePriceByCategoryId(
+            @Param("newPrice") BigDecimal newPrice, @Param("categoryId") Byte categoryId
+    );
 }
