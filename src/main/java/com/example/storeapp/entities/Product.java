@@ -23,7 +23,7 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -33,8 +33,7 @@ public class Product {
     public Product() {
 
     }
-    public Product(Long id, String name, BigDecimal price, String description) {
-        this.id = id;
+    public Product( String name, BigDecimal price, String description) {
         this.name = name;
         this.price = price;
         this.description = description;

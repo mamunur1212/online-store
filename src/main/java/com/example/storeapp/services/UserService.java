@@ -1,13 +1,15 @@
 package com.example.storeapp.services;
 
 import com.example.storeapp.entities.Address;
+import com.example.storeapp.entities.Category;
+import com.example.storeapp.entities.Product;
 import com.example.storeapp.entities.User;
-import com.example.storeapp.repositories.AddressRepository;
-import com.example.storeapp.repositories.ProfileRepository;
-import com.example.storeapp.repositories.UserRepository;
+import com.example.storeapp.repositories.*;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 @Service
 public class UserService {
@@ -15,12 +17,16 @@ public class UserService {
     private final EntityManager entityManager;
     private final ProfileRepository profileRepository;
     private final AddressRepository addressRepository;
+    private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
-    public UserService(UserRepository userRepository, EntityManager entityManager, ProfileRepository profileRepository, AddressRepository addressRepository) {
+    public UserService(UserRepository userRepository, EntityManager entityManager, ProfileRepository profileRepository, AddressRepository addressRepository, CategoryRepository categoryRepository, ProductRepository productRepository) {
         this.userRepository = userRepository;
         this.entityManager = entityManager;
         this.profileRepository = profileRepository;
         this.addressRepository = addressRepository;
+        this.categoryRepository = categoryRepository;
+        this.productRepository = productRepository;
     }
 
     @Transactional
@@ -62,5 +68,41 @@ public class UserService {
         var address = user.getAddresses().getFirst();
         user.removeAddress(address);
         userRepository.save(user);
+    }
+
+    public void saveCategoryAndProduct() {
+        // Implement logic to save category and product
+        Category category = new Category("Electronics");
+        // Create a product and associate it with the category
+        Product product = new Product("Smartphone", new BigDecimal("699.99"), "A high-end smartphone with a great camera.");
+        // Save the category and product using the appropriate repository
+        product.setCategory(category);
+        productRepository.save(product);
+    }
+
+    @Transactional
+    public void fetchProductsByCategory() {
+        // Implement logic to fetch products by category
+        Category category = categoryRepository.findById((byte) 1)
+                .orElseThrow();
+        // System.out.println("Products in category " + category.getName() + ":");
+        Product product = new Product("Smartphone1", new BigDecimal("599.99"), "A high-end smartphone with a great camera and video capabilities.");
+        product.setCategory(category);
+        productRepository.save(product);
+
+    }
+
+    @Transactional
+    public void addProductToWishlist() {
+        User user = userRepository.findById(1L).orElseThrow();
+        var products = productRepository.findAll();
+        products.forEach(user::addProduct);
+        userRepository.save(user);
+    }
+
+    @Transactional
+    public void deleteProduct() {
+        Product product = productRepository.findById(1L).orElseThrow();
+        productRepository.delete(product);
     }
 }
