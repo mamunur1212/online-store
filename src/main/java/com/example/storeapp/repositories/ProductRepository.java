@@ -1,5 +1,7 @@
 package com.example.storeapp.repositories;
 
+import com.example.storeapp.dtos.ProductSummary;
+import com.example.storeapp.dtos.ProductSummaryDTO;
 import com.example.storeapp.entities.Product;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -85,4 +87,8 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     void updatePriceByCategoryId(
             @Param("newPrice") BigDecimal newPrice, @Param("categoryId") Byte categoryId
     );
+
+    // List<Product> findByCategoryId(Byte categoryId);
+    // List<ProductSummary> findByCategoryId(Byte categoryId);
+    List<ProductSummaryDTO> findByCategoryId(Byte categoryId);
 }
