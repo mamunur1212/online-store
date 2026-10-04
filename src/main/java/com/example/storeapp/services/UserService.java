@@ -54,6 +54,7 @@ public class UserService {
     public void fetchAddress() {
         var address = addressRepository.findById(1L).orElseThrow();
     }
+
     public void persistRelated() {
         User user = new User("John Doe", "john81.doe@example.com", "password");
         Address address = new Address("123 Main St", "Anytown", "CA", "12345");
@@ -114,5 +115,10 @@ public class UserService {
     public void fetchProductByCategoryId() {
         var products = productRepository.findByCategoryId((byte) 1);
         products.forEach(System.out::println);
+    }
+    @Transactional
+    public void fetchUserByEmail() {
+        var user = userRepository.findByEmail("aa").orElseThrow();
+        System.out.println(user);
     }
 }
