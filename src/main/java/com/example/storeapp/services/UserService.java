@@ -163,4 +163,9 @@ public class UserService {
             System.out.println("User ID: " + user.getId() + ", Email: "+ user.getEmail());
         });
     }
+
+    public void fetchProductsByCriteria() {
+        var products = productRepository.findProductsByCriteria("prod", BigDecimal.valueOf(1), null);
+        products.forEach(System.out::println);
+    }
 }
