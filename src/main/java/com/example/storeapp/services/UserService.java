@@ -129,4 +129,11 @@ public class UserService {
             user.getAddresses().forEach(address -> System.out.println("Address: " + address.getStreet()));
         });
     }
+
+    @Transactional
+    public void fetchProducts() {
+        var products = productRepository.findProducts(new BigDecimal("100"), new BigDecimal("1000"));
+        products.forEach(product -> System.out.println("Product: " + product.getName() + ", Price: " + product.getPrice()));
+
+    }
 }
