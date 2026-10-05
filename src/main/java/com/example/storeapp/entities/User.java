@@ -36,8 +36,8 @@ public class User {
     )
     private Set<Tag> tags = new HashSet<>();
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private Profile profile;
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+//    private Profile profile;
 
     @ManyToMany
     @JoinTable(
@@ -105,10 +105,10 @@ public class User {
         tag.getUsers().add(this);
     }
 
-    public void addProfile(Profile profile) {
-        this.profile = profile;
-        profile.setUser(this);
-    }
+//    public void addProfile(Profile profile) {
+//        this.profile = profile;
+//        profile.setUser(this);
+//    }
 
     public void addProduct(Product product) {
         wishlists.add(product);
@@ -130,12 +130,12 @@ public class User {
         product.getUsers().remove(this);
     }
 
-    public void removeProfile(Profile profile) {
-        if (this.profile != null && this.profile.equals(profile)) {
-            this.profile = null;
-            profile.setUser(null);
-        }
-    }
+//    public void removeProfile(Profile profile) {
+//        if (this.profile != null && this.profile.equals(profile)) {
+//            this.profile = null;
+//            profile.setUser(null);
+//        }
+//    }
 
     @Override
     public String toString() {

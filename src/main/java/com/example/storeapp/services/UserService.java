@@ -121,4 +121,12 @@ public class UserService {
         var user = userRepository.findByEmail("aa").orElseThrow();
         System.out.println(user);
     }
+
+    public void fetchAllUsersWithAddresses() {
+        var users = userRepository.findAllUserWithAddresses();
+        users.forEach(user -> {
+            System.out.println("User: " + user);
+            user.getAddresses().forEach(address -> System.out.println("Address: " + address.getStreet()));
+        });
+    }
 }
