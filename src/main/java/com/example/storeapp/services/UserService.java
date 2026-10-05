@@ -7,6 +7,8 @@ import com.example.storeapp.entities.User;
 import com.example.storeapp.repositories.*;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -132,8 +134,21 @@ public class UserService {
 
     @Transactional
     public void fetchProducts() {
-        var products = productRepository.findProducts(new BigDecimal("100"), new BigDecimal("1000"));
-        products.forEach(product -> System.out.println("Product: " + product.getName() + ", Price: " + product.getPrice()));
+        // var products = productRepository.findProducts(new BigDecimal("100"), new BigDecimal("1000"));
+        // products.forEach(product -> System.out.println("Product: " + product.getName() + ", Price: " + product.getPrice()));
+
+        var product = new Product();
+        product.setName("product");
+
+        var matcher = ExampleMatcher.matching()
+                .withIncludeNullValues()
+                .withIgnorePaths("id", "description")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        var example = Example.of(product, matcher);
+
+        var products = productRepository.findAll(example);
+        products.forEach(p -> System.out.println("Product: " + p.getName() + ", Price: " + p.getPrice()));
 
     }
 

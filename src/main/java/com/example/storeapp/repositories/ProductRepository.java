@@ -3,6 +3,8 @@ package com.example.storeapp.repositories;
 import com.example.storeapp.dtos.ProductSummary;
 import com.example.storeapp.dtos.ProductSummaryDTO;
 import com.example.storeapp.entities.Product;
+import org.springframework.data.domain.Example;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -12,7 +14,7 @@ import org.springframework.data.repository.query.Param;
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface ProductRepository extends CrudRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
     // String
     List<Product> findByName(String name);
     List<Product> findByNameLike(String name);
