@@ -36,8 +36,8 @@ public class User {
     )
     private Set<Tag> tags = new HashSet<>();
 
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
-//    private Profile profile;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private Profile profile;
 
     @ManyToMany
     @JoinTable(

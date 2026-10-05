@@ -136,4 +136,16 @@ public class UserService {
         products.forEach(product -> System.out.println("Product: " + product.getName() + ", Price: " + product.getPrice()));
 
     }
+
+    @Transactional
+    public void fetchUserProfile() {
+//        var profile = profileRepository.findLoyaltyPoints(2);
+//        profile.forEach(p -> {
+//            System.out.println("Profile: " + p.getId() + ", User Email: "+ p.getEmail());
+//        });
+        var users = userRepository.findLoyalUsers(2);
+        users.forEach(user -> {
+            System.out.println("User ID: " + user.getId() + ", Email: "+ user.getEmail());
+        });
+    }
 }

@@ -19,7 +19,7 @@ public class StoreAppApplication {
         ApplicationContext context =  SpringApplication.run(StoreAppApplication.class, args);
 
         var service =  context.getBean(UserService.class);
-        service.fetchProducts();
+        service.fetchUserProfile();
 
 
         // User user = new User("John Doe", "hello1@example.com", "password");
