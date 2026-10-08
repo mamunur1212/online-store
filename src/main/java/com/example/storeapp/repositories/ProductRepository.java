@@ -2,7 +2,6 @@ package com.example.storeapp.repositories;
 
 import com.example.storeapp.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
