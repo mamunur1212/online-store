@@ -1,5 +1,6 @@
 package com.example.storeapp.controllers;
 
+import com.example.storeapp.dtos.ChangePasswordRequest;
 import com.example.storeapp.dtos.RegisterUserRequest;
 import com.example.storeapp.dtos.UpdateUserRequest;
 import com.example.storeapp.dtos.UserDto;
@@ -79,6 +80,23 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         userRepository.delete(user);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/change-password")
+    public ResponseEntity<Void> changePassword(
+            @PathVariable Long id,
+            @RequestBody ChangePasswordRequest request
+    ) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        if (!user.getPassword().equals(request.getOldPassword())) {
+            return ResponseEntity.badRequest().build();
+        }
+        user.setPassword(request.getNewPassword());
+        userRepository.save(user);
         return ResponseEntity.noContent().build();
     }
 }

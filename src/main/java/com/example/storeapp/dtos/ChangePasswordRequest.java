@@ -1,0 +1,11 @@
+package com.example.storeapp.dtos;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+public class ChangePasswordRequest {
+    private String oldPassword;
+    private String newPassword;
+}
